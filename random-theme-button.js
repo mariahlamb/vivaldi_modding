@@ -1,5 +1,5 @@
 // Random Theme Button
-// version 2022.10.2
+// version 2026.5.0
 // https://forum.vivaldi.net/topic/34767/random-theme-button
 // Load a random theme when clicking a command chain button.
 
@@ -7,10 +7,10 @@
   function randomize() {
     vivaldi.prefs.get("vivaldi.themes.current", (current) => {
       vivaldi.prefs.get("vivaldi.themes.user", (collection) => {
-        if (collection.length > 1) {
+        if (collection.value.length > 1) {
           let rd = "";
-          while (rd === "" || rd.id === current) {
-            rd = collection[Math.floor(Math.random() * collection.length)];
+          while (rd === "" || rd.id === current.value) {
+            rd = collection.value[Math.floor(Math.random() * collection.value.length)];
           }
           vivaldi.prefs.set({ path: "vivaldi.themes.current", value: rd.id });
         } else {
