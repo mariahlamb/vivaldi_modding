@@ -23,10 +23,12 @@
       filter = "grayscale(1)";
     }
     css.innerHTML = `
-      .button-toolbar-webpanel img {
+      .button-toolbar-webpanel img,
+      .SiteInfoButton img {
         filter: brightness(0.77) ${filter};
       }
-      #browser.isblurred.dim-blurred .button-toolbar-webpanel img {
+      #browser.isblurred.dim-blurred .button-toolbar-webpanel img,
+      #browser.isblurred.dim-blurred .SiteInfoButton img {
         filter: brightness(0.77) ${filter} opacity(0.65) !important;
       }
     `;
