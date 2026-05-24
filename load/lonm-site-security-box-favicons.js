@@ -55,7 +55,8 @@
     });
     // The tab loaded somewhere new, so favicon needs updating
     chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-        if(changeInfo.faviconUrl || changeInfo.status){
+        const vivExtData = JSON.parse(tab.vivExtData); 
+        if(!('panelId' in vivExtData) && (changeInfo.faviconUrl || changeInfo.status)){
             clone_favicon_and_add_to_security(tab);
         }
     });
