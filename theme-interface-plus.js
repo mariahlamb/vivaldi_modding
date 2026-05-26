@@ -1,8 +1,8 @@
 // Theme Interface plus
-// version 2022.5.0
+// version 2026.5.0
 // https://forum.vivaldi.net/post/531981
 // Adds functionality to toggle system themes, sort user themes alphabetically,
-// move themes individually and expand the overview, to Vivaldi’s settings page.
+// move themes individually, and expand the overview, to Vivaldi’s settings page.
 
 (function themeInterfacePlus() {
   function toggle(init) {
@@ -12,8 +12,10 @@
       (systemDefault === 1 && init !== 1)
     ) {
       if (!css) {
-        vivaldi.prefs.get("vivaldi.themes.current", (current) => {
-          vivaldi.prefs.get("vivaldi.themes.system", (sys) => {
+        vivaldi.prefs.get("vivaldi.themes.current", (currentObj) => {
+          const current = currentObj.value;
+          vivaldi.prefs.get("vivaldi.themes.system", (sysObj) => {
+            const sys = sysObj.value;
             let index = sys.findIndex((x) => x.id === current);
             const hide = document.createElement("style");
             hide.id = "vm-tip-css";
@@ -34,17 +36,18 @@
   }
 
   function sort() {
-    vivaldi.prefs.get("vivaldi.themes.user", (collection) => {
-      collection.sort((a, b) => {
-        return a.name.localeCompare(b.name);
-      });
+    vivaldi.prefs.get("vivaldi.themes.user", (collectionObj) => {
+      const collection = collectionObj.value;
+      collection.sort((a, b) => a.name.localeCompare(b.name));
       vivaldi.prefs.set({ path: "vivaldi.themes.user", value: collection });
     });
   }
 
   function move(dir) {
-    vivaldi.prefs.get("vivaldi.themes.current", (current) => {
-      vivaldi.prefs.get("vivaldi.themes.user", (collection) => {
+    vivaldi.prefs.get("vivaldi.themes.current", (currentObj) => {
+      const current = currentObj.value;
+      vivaldi.prefs.get("vivaldi.themes.user", (collectionObj) => {
+        const collection = collectionObj.value;
         let index = collection.findIndex((x) => x.id === current);
         if (index > -1 && dir === "right") {
           if (index === collection.length - 1) {
@@ -136,3 +139,4 @@
     }
   });
 })();
+
