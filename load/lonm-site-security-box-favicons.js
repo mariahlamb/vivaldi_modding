@@ -55,7 +55,7 @@
     });
     // The tab loaded somewhere new, so favicon needs updating
     chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-        if(tab.active === true && (changeInfo.faviconUrl || changeInfo.status === 'complete')) {
+        if(tab.active === true && (changeInfo.faviconUrl || changeInfo.status)) {
             clone_favicon_and_add_to_security(tab);
         }
     });
