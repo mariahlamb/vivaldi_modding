@@ -4,7 +4,7 @@
 #browser.linux button,
 #browser.linux input,
 #browser.linux select,
-#browser.linux textarea {
+#browser.linux textarea:not(.editor-plaintext) {
   font-family: "Adwaita Sans", system-ui, sans-serif;
   /* round quotes and commas, lower-case L with tail, tabular numbers */
   /* font-feature-settings: "ss03", "cv05", "tnum"; */
